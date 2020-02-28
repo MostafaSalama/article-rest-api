@@ -1,9 +1,9 @@
 const router = require('express').Router();
-
-router.get('/', (req, res) => {
-	res.json({
-		result: 'all articles will be displayed for you',
-	});
+const Article = require('../models/Article')
+router.get('/', async (req, res) => {
+	const articles = await  Article.find({},{comments:0});
+	res.json(articles);
 });
+
 
 module.exports = router ;

@@ -1,0 +1,24 @@
+{
+  "name": "article-rest-api",
+  "version": "1.0.0",
+  "description": "A simple REST API for reading and updating articles for an app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MostafaSalama/article-rest-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MostafaSalama/article-rest-api/issues"
+  },
+  "homepage": "https://github.com/MostafaSalama/article-rest-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2"
+  }
+}

@@ -27,4 +27,24 @@ router.get('/:id', async (req, res) => {
 		res.json({ error: true, message: 'please try to pass the correct id' });
 	}
 });
+router.delete('/',async (req,res)=>{
+	const {articleId} = req.query ;
+	if(!articleId) {
+		res.json(
+			{error:true,message:"please provide articleId"}
+		);
+	}
+	try {
+		console.log(`articleId is ${articleId}`)
+		const article = await Article.deleteOne({_id:articleId}) ;
+		console.log(article);
+		res.json({done:true});
+	}
+	catch (e) {
+		res.json({
+			error:true,
+			message:e.message
+		})
+	}
+})
 module.exports = router;

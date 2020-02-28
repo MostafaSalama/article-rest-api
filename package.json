@@ -4,7 +4,8 @@
   "description": "A simple REST API for reading and updating articles for an app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/bin/server.js"
   },
   "repository": {
     "type": "git",

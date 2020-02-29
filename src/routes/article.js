@@ -48,7 +48,7 @@ router.delete('/', async (req, res) => {
 	using its it and put method
  */
 router.put('/:id', async (req, res) => {
-	console.log(req.params.id)
+	console.log(req.params.id);
 	const { title, body } = req.body;
 	try {
 		const article = await Article.findOne({ _id: req.params.id });
@@ -56,6 +56,18 @@ router.put('/:id', async (req, res) => {
 		article.body = body;
 		await article.save();
 		res.json(article);
+	} catch (e) {
+		res.json({ error: true, message: e.message });
+	}
+});
+// router to get all comments for a specific comment
+router.get('/:id/comments', async (req, res) => {
+	const id = req.params.id;
+	if (!id)
+		res.json({ error: true, message: 'Please provide an id for the article' });
+	try {
+		const article = await Article.findOne({ _id: id });
+		res.json(article.comments);
 	} catch (e) {
 		res.json({ error: true, message: e.message });
 	}

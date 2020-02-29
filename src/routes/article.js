@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 const Article = require('../models/Article');
 router.get('/', async (req, res) => {
 	const articles = await Article.find({}, { comments: 0, __v: 0 });
@@ -69,6 +70,24 @@ router.get('/:id/comments', async (req, res) => {
 		const article = await Article.findOne({ _id: id });
 		res.json(article.comments);
 	} catch (e) {
+		res.json({ error: true, message: e.message });
+	}
+});
+router.post('/:id/comments', async (req, res) => {
+	const id = req.params.id;
+	if (!id)
+		res.json({ error: true, message: 'Please provide an id for the article' });
+	if(!req.body.comment) {
+		res.json({error:true,message:'No comment provided'})
+	}
+	try {
+		const article = await Article.findOne({_id:id});
+		const comment = {body:req.body.comment,_id:new mongoose.Types.ObjectId()} ;
+		article.comments.push(comment);
+		await article.save() ;
+		res.json(comment)
+	}
+	catch (e) {
 		res.json({ error: true, message: e.message });
 	}
 });
